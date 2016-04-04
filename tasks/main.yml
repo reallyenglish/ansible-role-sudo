@@ -1,0 +1,30 @@
+---
+# tasks file for ansible-role-sudo
+
+- name: Include OS-specific vars
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- include: install-FreeBSD.yml
+  when: ansible_os_family == 'FreeBSD'
+  
+- name: Create sudoers.d
+  file:
+    path: "{{ sudo_etc_dir }}/sudoers.d"
+    state: directory
+
+- name: Create sudoers(5) fragments
+  template:
+    dest: "{{ sudo_etc_dir }}/sudoers.d/{{ item }}"
+    mode: 0440
+    src: "{{ item }}.j2"
+    validate: "visudo --check -f %s"
+  with_items:
+      - icinga
+
+- name: Create sudoers(5)
+  template:
+    dest: "{{ sudo_etc_dir }}/sudoers"
+    mode: 0440
+    src: sudoers.j2
+    validate: "visudo --check -f %s"
+
