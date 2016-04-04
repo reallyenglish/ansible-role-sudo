@@ -12,7 +12,7 @@ Role Variables
 --------------
 
 |Variable                      | Description|
-|------------------------------|-----------:|
+|------------------------------|:-----------|
 |sudo\_configs                 | a hash of config fragments (see example below)|
 |sudo\_configs\_to\_be\_removed| an array of config fragments to be removed|
 
