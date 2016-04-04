@@ -15,9 +15,13 @@ describe file("#{etc_dir}/sudoers.d") do
   it { should be_directory }
 end
 
-describe file("#{etc_dir}/sudoers.d/icinga") do
+describe file("#{etc_dir}/sudoers.d/idcfop") do
   it { should be_file }
   it { should be_mode 440 }
+end
+
+describe file("#{etc_dir}/sudoers.d/icinga") do
+  it { should_not exist }
 end
 
 describe file("#{etc_dir}/sudoers") do

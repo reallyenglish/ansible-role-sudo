@@ -14,12 +14,11 @@
 
 - name: Create sudoers(5) fragments
   template:
-    dest: "{{ sudo_etc_dir }}/sudoers.d/{{ item }}"
+    dest: "{{ sudo_etc_dir }}/sudoers.d/{{ item.key }}"
     mode: 0440
-    src: "{{ item }}.j2"
+    src: sudoers_fragment.j2
     validate: "visudo --check -f %s"
-  with_items:
-      - icinga
+  with_dict: sudo_configs
 
 - name: Create sudoers(5)
   template:
@@ -28,3 +27,8 @@
     src: sudoers.j2
     validate: "visudo --check -f %s"
 
+- name: Remove sudoers(5) fragments
+  file:
+    path: "{{ sudo_etc_dir }}/sudoers.d/{{ item }}"
+    state: absent
+  with_items: sudo_configs_to_be_removed

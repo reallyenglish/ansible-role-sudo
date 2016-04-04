@@ -11,7 +11,8 @@ None
 Role Variables
 --------------
 
-None (at the moment)
+sudo\_configs: a hash of config fragments (see example below)
+sudo\_configs\_to\_be\_removed: an array of config fragments
 
 Dependencies
 ------------
@@ -24,6 +25,12 @@ Example Playbook
     - hosts: servers
       roles:
          - { sudo }
+      vars:
+        sudo_configs:
+          foo:
+            - User_Alias FOO = foo
+            - Cmnd_Alias SH = /bin/sh
+            - FOO ALL = (root) SH
 
 License
 -------
