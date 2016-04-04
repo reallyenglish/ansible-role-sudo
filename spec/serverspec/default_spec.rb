@@ -18,6 +18,9 @@ end
 describe file("#{etc_dir}/sudoers.d/idcfop") do
   it { should be_file }
   it { should be_mode 440 }
+  its(:content) { should match /User_Alias IDCF = idcfop/ }
+  its(:content) { should match /Cmnd_Alias MAKE = \/usr\/bin\/make/ }
+  its(:content) { should match /IDCF ALL = \(root\) MAKE/ }
 end
 
 describe file("#{etc_dir}/sudoers.d/icinga") do
