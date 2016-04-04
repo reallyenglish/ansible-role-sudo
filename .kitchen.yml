@@ -9,7 +9,6 @@ provisioner:
   require_ruby_for_busser: false
   ansible_verbosity: 3
   ansible_verbose: true
-  http_proxy: http://10.5.54.32:8123
 
 platforms:
   - name: freebsd-10.2-amd64
