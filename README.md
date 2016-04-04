@@ -11,8 +11,10 @@ None
 Role Variables
 --------------
 
-sudo\_configs: a hash of config fragments (see example below)
-sudo\_configs\_to\_be\_removed: an array of config fragments
+|Variable                      | Description|
+|------------------------------|-----------:|
+|sudo\_configs                 | a hash of config fragments (see example below)|
+|sudo\_configs\_to\_be\_removed| an array of config fragments to be removed|
 
 Dependencies
 ------------
@@ -26,6 +28,8 @@ Example Playbook
       roles:
          - { sudo }
       vars:
+        sudo_configs_to_be_removed:
+          - removeme
         sudo_configs:
           foo:
             - User_Alias FOO = foo
