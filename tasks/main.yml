@@ -8,27 +8,15 @@
   when: ansible_os_family == 'FreeBSD'
   
 - name: Create sudoers.d
-  file:
-    path: "{{ sudo_etc_dir }}/sudoers.d"
-    state: directory
+  file: path="{{ sudo_etc_dir }}/sudoers.d" state=directory
 
 - name: Create sudoers(5) fragments
-  template:
-    dest: "{{ sudo_etc_dir }}/sudoers.d/{{ item.key }}"
-    mode: 0440
-    src: sudoers_fragment.j2
-    validate: "visudo --check -f %s"
+  template: dest="{{ sudo_etc_dir }}/sudoers.d/{{ item.key }}" mode=0440 src=sudoers_fragment.j2 validate="visudo --check -f %s"
   with_dict: sudo_configs
 
 - name: Create sudoers(5)
-  template:
-    dest: "{{ sudo_etc_dir }}/sudoers"
-    mode: 0440
-    src: sudoers.j2
-    validate: "visudo --check -f %s"
+  template: dest="{{ sudo_etc_dir }}/sudoers" mode=0440 src=sudoers.j2 validate="visudo --check -f %s"
 
 - name: Remove sudoers(5) fragments
-  file:
-    path: "{{ sudo_etc_dir }}/sudoers.d/{{ item }}"
-    state: absent
+  file: path="{{ sudo_etc_dir }}/sudoers.d/{{ item }}" state=absent
   with_items: sudo_configs_to_be_removed
