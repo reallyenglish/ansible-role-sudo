@@ -1,3 +1,5 @@
 ---
 - name: Ensure sudo is present
-  pkgng: name=sudo state=present
+    pkgng:
+      name: sudo
+      state: present
