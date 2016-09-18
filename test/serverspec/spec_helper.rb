@@ -1,17 +1,13 @@
-- hosts: all
-  pre_tasks:
-    - name: Include OS-specific vars
-      include_vars: "roles/ansible-role-sudo/vars/{{ ansible_os_family }}.yml"
-    - file:
-        path: "{{ sudo_etc_dir }}/sudoers.d/icinga"
-        state: touch
-  roles:
-    - ansible-role-sudo
-  vars:
-    sudo_configs:
-      idcfop:
-        - User_Alias IDCF = idcfop
-        - Cmnd_Alias MAKE = /usr/bin/make
-        - IDCF ALL = (root) MAKE
-    sudo_configs_to_be_removed:
-        - icinga
+require 'serverspec'
+
+set :backend, :ssh
+
+options = Net::SSH::Config.for(host)
+options[:host_name] = ENV['KITCHEN_HOSTNAME']
+options[:user]      = ENV['KITCHEN_USERNAME']
+options[:port]      = ENV['KITCHEN_PORT']
+options[:keys]      = ENV['KITCHEN_SSH_KEY']
+
+set :host,        options[:host_name]
+set :ssh_options, options
+set :env, :LANG => 'C', :LC_ALL => 'C'
