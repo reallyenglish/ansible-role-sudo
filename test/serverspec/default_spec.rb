@@ -5,7 +5,7 @@ describe package ('sudo') do
 end
 
 
-etc_dir = '/etc/sudo'
+etc_dir = '/etc'
 case os[:family]
 when 'freebsd'
   etc_dir = '/usr/local/etc'
