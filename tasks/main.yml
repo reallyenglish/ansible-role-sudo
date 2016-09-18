@@ -18,7 +18,7 @@
     mode: 0440
     src: sudoers_fragment.j2
     validate: "visudo --check -f %s"
-  with_dict: sudo_configs
+  with_dict: "{{ sudo_configs }}"
 
 - name: Create sudoers(5)
   template:
@@ -31,4 +31,4 @@
   file:
     path: "{{ sudo_etc_dir }}/sudoers.d/{{ item }}"
     state: absent
-  with_items: sudo_configs_to_be_removed
+  with_items: "{{ sudo_configs_to_be_removed }}"
