@@ -1,5 +1,6 @@
 node ('virtualbox') {
   def directory = "ansible-role-sudo"
+  env.ANSIBLE_VAULT_PASSWORD_FILE = "~/.ansible_vault_key"
   stage 'Clean up'
   deleteDir()
   stage 'Checkout'

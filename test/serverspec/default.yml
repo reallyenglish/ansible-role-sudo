@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: localhost
   pre_tasks:
     - name: Include OS-specific vars
       include_vars: "roles/ansible-role-sudo/vars/{{ ansible_os_family }}.yml"
@@ -14,4 +14,4 @@
         - Cmnd_Alias MAKE = /usr/bin/make
         - IDCF ALL = (root) MAKE
     sudo_configs_to_be_removed:
-        - icinga
+      - icinga

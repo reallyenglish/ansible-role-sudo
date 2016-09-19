@@ -1,4 +1,5 @@
 ---
 # defaults file for ansible-role-sudo
+sudo_etc_dir: "{{ __sudo_etc_dir }}"
 sudo_configs: {}
 sudo_configs_to_be_removed: []
