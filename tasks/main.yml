@@ -16,7 +16,7 @@
     dest: "{{ sudo_etc_dir }}/sudoers.d/{{ item.key }}"
     mode: 0440
     src: sudoers_fragment.j2
-    validate: "visudo --check -f %s"
+    validate: "visudo -c -f %s"
   with_dict: "{{ sudo_configs }}"
 
 - name: Create sudoers(5)
@@ -24,7 +24,7 @@
     dest: "{{ sudo_etc_dir }}/sudoers"
     mode: 0440
     src: sudoers.j2
-    validate: "visudo --check -f %s"
+    validate: "visudo -c -f %s"
 
 - name: Remove sudoers(5) fragments
   file:
