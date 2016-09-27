@@ -3,3 +3,7 @@
 sudo_etc_dir: "{{ __sudo_etc_dir }}"
 sudo_configs: {}
 sudo_configs_to_be_removed: []
+
+# global config
+sudo_conf_env_keep: "{{ __sudo_conf_env_keep }}"
+sudo_conf_default_allow_groups: "{{ __sudo_conf_default_allow_groups }}"

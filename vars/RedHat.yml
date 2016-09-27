@@ -1,1 +1,3 @@
 __sudo_etc_dir: /etc
+__sudo_conf_env_keep: []
+__sudo_conf_default_allow_groups: [ wheel ]

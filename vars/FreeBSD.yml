@@ -1,1 +1,18 @@
 __sudo_etc_dir: /usr/local/etc
+__sudo_conf_default_allow_groups: [ wheel ]
+__sudo_conf_env_keep:
+# those that are required to build ports
+  - FTP_PASSIVE_MODE
+  - PACKAGEROOT
+  - PACKAGES
+  - PACKAGESITE
+  - PACKAGESITE_MIRRORS
+  - PKG_DBDIR
+  - PKGDIR
+  - PKG_PATH
+  - PKG_TMPDIR
+  - PKGTOOLS_CONF
+  - PORTS_DBDIR
+  - PORTSDIR
+  - PORTS_INDEX
+  - TMPDIR

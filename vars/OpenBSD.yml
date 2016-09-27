@@ -1,1 +1,29 @@
 __sudo_etc_dir: /etc
+__sudo_conf_default_allow_groups: [ wheel ]
+__sudo_conf_env_keep:
+  # build release(8) and ports(7)
+  - DESTDIR
+  - DISTDIR
+  - FETCH_CMD
+  - FLAVOR
+  - FTPMODE
+  - GROUP
+  - MAKE
+  - MAKECONF
+  - MULTI_PACKAGES
+  - NOMAN
+  - OKAY_FILES
+  - OWNER
+  - PKG_CACHE
+  - PKG_DBDIR
+  - PKG_DESTDIR
+  - PKG_PATH
+  - PKG_TMPDIR
+  - PORTSDIR
+  - RELEASEDIR
+  - SHARED_ONLY
+  - SM_PATH
+  - SSH_AUTH_SOCK
+  - SUBPACKAGE
+  - SUDO_PORT_V1
+  - WRKOBJDIR

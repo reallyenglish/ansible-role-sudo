@@ -1,8 +1,15 @@
-Defaults env_keep += "PKG_PATH PKG_DBDIR PKG_TMPDIR TMPDIR PACKAGEROOT PACKAGESITE PACKAGESITE_MIRRORS PKGDIR FTP_PASSIVE_MODE"
-Defaults env_keep += "PORTSDIR PORTS_INDEX PORTS_DBDIR PACKAGES PKGTOOLS_CONF"
+Defaults env_reset
+
+## Allow harmless ENV
+Defaults env_keep = "COLORS LS_COLORS PS1 PS2"
+
+{% for variable in sudo_conf_env_keep %}
+Defaults env_keep += "{{ variable }}"
+{% endfor %}
 
 root    ALL=(ALL) SETENV: ALL
-%wheel  ALL=(ALL) ALL
-%sudo   ALL=(ALL:ALL) ALL
+{% for group in sudo_conf_default_allow_groups %}
+%{{ group }} ALL=(ALL) ALL
+{% endfor %}
 
 #includedir {{ sudo_etc_dir }}/sudoers.d
