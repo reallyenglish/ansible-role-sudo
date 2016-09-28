@@ -1,3 +1,4 @@
+__sudo_package_name: sudo
 __sudo_etc_dir: /usr/local/etc
 __sudo_conf_default_allow_groups: [ wheel ]
 __sudo_conf_env_keep:
