@@ -2,5 +2,5 @@
 
 - name: Install sudo
   apt:
-    name: sudo
+    name: "{{ sudo_package_name }}"
     state: present

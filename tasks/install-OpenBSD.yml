@@ -2,7 +2,7 @@
 
 - name: Install sudo
   openbsd_pkg:
-    name: sudo
+    name: "{{ sudo_package_name }}"
     state: present
   # sudo was removed from base in 5.8
   when: "{{ ansible_distribution_release | version_compare('5.8', '>=') }}"
