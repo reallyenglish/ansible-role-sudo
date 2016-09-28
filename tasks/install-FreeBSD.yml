@@ -1,5 +1,5 @@
 ---
 - name: Ensure sudo is present
   pkgng:
-    name: sudo
+    name: "{{ sudo_package_name }}"
     state: present
