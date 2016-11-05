@@ -8,7 +8,14 @@ node ('virtualbox') {
   stage 'Checkout'
   sh "mkdir $directory"
   dir("$directory") {
-    checkout scm
+    try {
+        checkout scm
+        sh "git submodule update --init"
+    } catch (e) {
+        currentBuild.result = 'FAILURE'
+        notifyBuild(currentBuild.result)
+        throw e
+    }
   }
   dir("$directory") {
     stage 'bundle'
@@ -75,3 +82,4 @@ def notifyBuild(String buildStatus = 'STARTED') {
 
   hipchatSend (color: color, notify: true, message: summary)
 }
+/* vim: ft=groovy */
