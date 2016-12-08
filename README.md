@@ -1,15 +1,12 @@
-Role Name
-=========
+# ansible-role-sudo
 
-Install and configure sudo(1)
+Install and configure sudo(8)
 
-Requirements
-------------
+# Requirements
 
 None
 
-Role Variables
---------------
+# Role Variables
 
 |Variable                      | Description| Default |
 |------------------------------|:-----------|---------|
@@ -55,32 +52,30 @@ Role Variables
 | \_\_sudo\_conf\_env\_keep | [] |
 | \_\_sudo\_conf\_default\_allow\_groups | ["wheel"] |
 
-Dependencies
-------------
+# Dependencies
 
 None
 
-Example Playbook
-----------------
+# Example Playbook
 
-    - hosts: servers
-      roles:
-         - ansible-role-sudo
-      vars:
-        sudo_configs_to_be_removed:
-          - removeme
-        sudo_configs:
-          foo:
-            - User_Alias FOO = foo
-            - Cmnd_Alias SH = /bin/sh
-            - FOO ALL = (root) SH
+```yaml
+- hosts: servers
+  roles:
+     - ansible-role-sudo
+  vars:
+    sudo_configs_to_be_removed:
+      - removeme
+    sudo_configs:
+      foo:
+        - User_Alias FOO = foo
+        - Cmnd_Alias SH = /bin/sh
+        - FOO ALL = (root) SH
+```
 
-License
--------
+# License
 
 BSD
 
-Author Information
-------------------
+# Author Information
 
 Tomoyuki Sakurai <tomoyukis@reallyenglish.com>
