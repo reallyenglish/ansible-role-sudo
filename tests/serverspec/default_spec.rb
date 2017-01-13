@@ -40,10 +40,6 @@ describe file("#{etc_dir}/sudoers.d/idcfop") do
   its(:content) { should match /IDCF ALL = \(root\) MAKE/ }
 end
 
-describe file("#{etc_dir}/sudoers.d/icinga") do
-  it { should_not exist }
-end
-
 describe file("#{etc_dir}/sudoers") do
   it { should be_file }
   it { should be_mode 440 }
