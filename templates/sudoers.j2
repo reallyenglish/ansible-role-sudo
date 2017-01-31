@@ -3,9 +3,9 @@ Defaults env_reset
 ## Allow harmless ENV
 Defaults env_keep = "COLORS LS_COLORS PS1 PS2"
 
-{% for variable in sudo_conf_env_keep %}
-Defaults env_keep += "{{ variable }}"
-{% endfor %}
+{% if sudo_conf_env_keep | length > 0 %}
+Defaults env_keep += "{{ sudo_conf_env_keep | join(' ') }}"
+{% endif %}
 
 root    ALL=(ALL) SETENV: ALL
 {% for group in sudo_conf_default_allow_groups %}
