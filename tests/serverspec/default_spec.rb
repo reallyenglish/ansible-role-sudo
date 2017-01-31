@@ -12,9 +12,50 @@ end
 
 case os[:family]
 when 'freebsd'
-  env_keeps = %w[ PACKAGESITE PKGTOOLS_CONF ]
+  env_keeps = %w[
+    FTP_PASSIVE_MODE
+    PACKAGEROOT
+    PACKAGES
+    PACKAGESITE
+    PACKAGESITE_MIRRORS
+    PKG_DBDIR
+    PKGDIR
+    PKG_PATH
+    PKG_TMPDIR
+    PKGTOOLS_CONF
+    PORTS_DBDIR
+    PORTSDIR
+    PORTS_INDEX
+    TMPDIR
+  ]
 when 'openbsd'
-  env_keeps = %w[ SM_PATH PKG_TMPDIR ]
+  env_keeps = %w[
+    DESTDIR
+    DISTDIR
+    FETCH_CMD
+    FLAVOR
+    FTPMODE
+    GROUP
+    MAKE
+    MAKECONF
+    MULTI_PACKAGES
+    NOMAN
+    OKAY_FILES
+    OWNER
+    PKG_CACHE
+    PKG_DBDIR
+    PKG_DESTDIR
+    PKG_PATH
+    PKG_TMPDIR
+    PORTSDIR
+    RELEASEDIR
+    SHARED_ONLY
+    SM_PATH
+    SSH_AUTH_SOCK
+    SUBPACKAGE
+    SUDO_PORT_V1
+    WRKOBJDIR
+  ]
 end
 
 describe package ('sudo') do
@@ -49,7 +90,7 @@ describe file("#{etc_dir}/sudoers") do
   its(:content) { should match /^%#{ Regexp.escape(default_allow_group) } ALL=\(ALL\) ALL$/ }
   its(:content) { should match /^#includedir #{ Regexp.escape(etc_dir) }\/sudoers\.d$/ }
 
-  env_keeps.each do |env|
-    its(:content) { should match /^Defaults\s+env_keep\s+\+=\s+\"#{ env }\"$/ }
+  if env_keeps.length > 0
+    its(:content) { should match /^Defaults\s+env_keep\s+\+=\s+\"#{ env_keeps.join(' ') }\"$/ }
   end
 end
