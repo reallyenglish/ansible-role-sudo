@@ -1,3 +1,7 @@
+## Release 1.1.0
+
+* f6d1841 Improve test cases and support Ubuntu 16.04 (#12)
+
 ##  Release 1.0.4
 
 * QA only, no funcitionality changes
