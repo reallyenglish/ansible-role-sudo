@@ -86,6 +86,7 @@ describe file("#{etc_dir}/sudoers") do
   it { should be_mode 440 }
   its(:content) { should match /^Defaults env_reset$/ }
   its(:content) { should match /^Defaults env_keep = "COLORS LS_COLORS PS1 PS2"$/ }
+  its(:content) { should match /^Defaults secure_path = "#{ Regexp.escape('/usr/bin:/bin:/usr/local/bin:/usr/sbin:/sbin:/usr/local/sbin') }"$/ }
   its(:content) { should match /^root\s+ALL=\(ALL\)\s+SETENV:\s+ALL$/ }
   its(:content) { should match /^%#{ Regexp.escape(default_allow_group) } ALL=\(ALL\) ALL$/ }
   its(:content) { should match /^#includedir #{ Regexp.escape(etc_dir) }\/sudoers\.d$/ }
@@ -93,4 +94,10 @@ describe file("#{etc_dir}/sudoers") do
   if env_keeps.length > 0
     its(:content) { should match /^Defaults\s+env_keep\s+\+=\s+\"#{ env_keeps.join(' ') }\"$/ }
   end
+end
+
+describe command("sudo env") do
+  its(:exit_status) { should eq 0 }
+  its(:stderr) { should match(/^$/) }
+  its(:stdout) { should match(/^PATH=#{ Regexp.escape('/usr/bin:/bin:/usr/local/bin:/usr/sbin:/sbin:/usr/local/sbin') }$/) }
 end

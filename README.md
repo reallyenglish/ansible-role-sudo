@@ -15,6 +15,7 @@ None
 | `sudo_configs` | a dict of config fragments | `{}` |
 | `sudo_configs_to_be_removed` | list of config fragments to remove | `[]` |
 | `sudo_conf_env_keep` | list of environment variables to keep | `{{ __sudo_conf_env_keep }}` |
+| `sudo_conf_secure_path` | PATH enforced by default | `/usr/bin:/bin:/usr/local/bin:/usr/sbin:/sbin:/usr/local/sbin` |
 | `sudo_conf_default_allow_groups` | list of groups that can run any commands as root | `{{ __sudo_conf_default_allow_groups }}` |
 
 ## Debian
