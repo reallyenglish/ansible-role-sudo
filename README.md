@@ -2,6 +2,11 @@
 
 Install and configure sudo(8)
 
+## Note for Ubuntu xenial users
+
+The role disables reading ENV, which is implemented in `/etc/pam.d/sudo`, from
+`/etc/environment` to enforce `secure_path` in `sudoers(5)`.
+
 # Requirements
 
 None

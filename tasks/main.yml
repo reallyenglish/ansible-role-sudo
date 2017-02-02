@@ -5,7 +5,22 @@
   include_vars: "{{ ansible_os_family }}.yml"
 
 - include: "install-{{ ansible_os_family }}.yml"
-  
+
+- name: Disable readenv in /etc/pam.d/sudo
+  # XXX this pam file reads and sets ENV from a file, /etc/environment by
+  # default, which overrides secure_path in sudoers(5). see pam_env(8)
+  #
+  # session    required   pam_env.so readenv=1 user_readenv=0
+  lineinfile:
+    dest: /etc/pam.d/sudo
+    regexp: '^session\s+required\s+pam_env\.so\s+readenv=1\s+user_readenv=0'
+    line: "session    required   pam_env.so readenv=0 user_readenv=0"
+    backrefs: yes
+    state: present
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_release == 'xenial'
+
 - name: Create sudoers.d
   file:
     path: "{{ sudo_etc_dir }}/sudoers.d"
