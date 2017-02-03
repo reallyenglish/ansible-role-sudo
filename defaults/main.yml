@@ -7,4 +7,5 @@ sudo_configs_to_be_removed: []
 
 # global config
 sudo_conf_env_keep: "{{ __sudo_conf_env_keep }}"
+sudo_conf_secure_path: "/usr/bin:/bin:/usr/local/bin:/usr/sbin:/sbin:/usr/local/sbin"
 sudo_conf_default_allow_groups: "{{ __sudo_conf_default_allow_groups }}"

@@ -6,6 +6,7 @@ Defaults env_keep = "COLORS LS_COLORS PS1 PS2"
 {% if sudo_conf_env_keep | length > 0 %}
 Defaults env_keep += "{{ sudo_conf_env_keep | join(' ') }}"
 {% endif %}
+Defaults secure_path = "{{ sudo_conf_secure_path }}"
 
 root    ALL=(ALL) SETENV: ALL
 {% for group in sudo_conf_default_allow_groups %}
