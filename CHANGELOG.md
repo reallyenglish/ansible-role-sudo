@@ -1,3 +1,8 @@
+## Release 1.2.0
+
+* 1758eae add `secure_path` by default (#15)
+
+
 ## Release 1.1.0
 
 * f6d1841 Improve test cases and support Ubuntu 16.04 (#12)
