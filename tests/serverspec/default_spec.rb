@@ -96,11 +96,11 @@ describe file("#{etc_dir}/sudoers") do
   end
 end
 
-if os[:family] == 'ubuntu' && os[:release] == '16.04'
+if os[:family] == 'ubuntu'
   describe file("/etc/pam.d/sudo") do
     it { should be_file }
     it { should be_mode 644 }
-    its(:content) { should match(/^session\s+required\s+pam_env\.so\s+readenv=0\s+user_readenv=0$/) }
+    its(:content) { should match(/^(?:session|auth)\s+required\s+pam_env\.so\s+readenv=0\s+user_readenv=0$/) }
   end
 end
 
