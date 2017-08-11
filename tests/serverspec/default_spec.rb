@@ -1,18 +1,18 @@
-require 'spec_helper'
+require "spec_helper"
 
-default_allow_group = ''
+default_allow_group = ""
 env_keeps = []
 
 case os[:family]
-when 'freebsd', 'openbsd', 'redhat'
-  default_allow_group = 'wheel'
-when 'debian', 'ubuntu'
-  default_allow_group = 'sudo'
+when "freebsd", "openbsd", "redhat"
+  default_allow_group = "wheel"
+when "debian", "ubuntu"
+  default_allow_group = "sudo"
 end
 
 case os[:family]
-when 'freebsd'
-  env_keeps = %w[
+when "freebsd"
+  env_keeps = %w(
     FTP_PASSIVE_MODE
     PACKAGEROOT
     PACKAGES
@@ -27,9 +27,9 @@ when 'freebsd'
     PORTSDIR
     PORTS_INDEX
     TMPDIR
-  ]
-when 'openbsd'
-  env_keeps = %w[
+  )
+when "openbsd"
+  env_keeps = %w(
     DESTDIR
     DISTDIR
     FETCH_CMD
@@ -55,18 +55,17 @@ when 'openbsd'
     SUBPACKAGE
     SUDO_PORT_V1
     WRKOBJDIR
-  ]
+  )
 end
 
-describe package ('sudo') do
+describe package "sudo" do
   it { should be_installed }
 end
 
-
-etc_dir = '/etc'
+etc_dir = "/etc"
 case os[:family]
-when 'freebsd'
-  etc_dir = '/usr/local/etc'
+when "freebsd"
+  etc_dir = "/usr/local/etc"
 end
 
 describe file("#{etc_dir}/sudoers.d") do
@@ -76,27 +75,27 @@ end
 describe file("#{etc_dir}/sudoers.d/idcfop") do
   it { should be_file }
   it { should be_mode 440 }
-  its(:content) { should match /User_Alias IDCF = idcfop/ }
-  its(:content) { should match /Cmnd_Alias MAKE = \/usr\/bin\/make/ }
-  its(:content) { should match /IDCF ALL = \(root\) MAKE/ }
+  its(:content) { should match(/User_Alias IDCF = idcfop/) }
+  its(:content) { should match(/Cmnd_Alias MAKE = #{Regexp.escape("/usr/bin/make")}/) }
+  its(:content) { should match(/IDCF ALL = \(root\) MAKE/) }
 end
 
 describe file("#{etc_dir}/sudoers") do
   it { should be_file }
   it { should be_mode 440 }
-  its(:content) { should match /^Defaults env_reset$/ }
-  its(:content) { should match /^Defaults env_keep = "COLORS LS_COLORS PS1 PS2"$/ }
-  its(:content) { should match /^Defaults secure_path = "#{ Regexp.escape('/usr/bin:/bin:/usr/local/bin:/usr/sbin:/sbin:/usr/local/sbin') }"$/ }
-  its(:content) { should match /^root\s+ALL=\(ALL\)\s+SETENV:\s+ALL$/ }
-  its(:content) { should match /^%#{ Regexp.escape(default_allow_group) } ALL=\(ALL\) ALL$/ }
-  its(:content) { should match /^#includedir #{ Regexp.escape(etc_dir) }\/sudoers\.d$/ }
+  its(:content) { should match(/^Defaults env_reset$/) }
+  its(:content) { should match(/^Defaults env_keep = "COLORS LS_COLORS PS1 PS2"$/) }
+  its(:content) { should match(/^Defaults secure_path = "#{ Regexp.escape('/usr/bin:/bin:/usr/local/bin:/usr/sbin:/sbin:/usr/local/sbin') }"$/) }
+  its(:content) { should match(/^root\s+ALL=\(ALL\)\s+SETENV:\s+ALL$/) }
+  its(:content) { should match(/^%#{ Regexp.escape(default_allow_group) } ALL=\(ALL\) ALL$/) }
+  its(:content) { should match(/^#includedir #{ Regexp.escape("#{etc_dir}/sudoers.d") }$/) }
 
-  if env_keeps.length > 0
-    its(:content) { should match /^Defaults\s+env_keep\s+\+=\s+\"#{ env_keeps.join(' ') }\"$/ }
+  unless env_keeps.empty?
+    its(:content) { should match(/^Defaults\s+env_keep\s+\+=\s+\"#{ env_keeps.join(' ') }\"$/) }
   end
 end
 
-if os[:family] == 'ubuntu'
+if os[:family] == "ubuntu"
   describe file("/etc/pam.d/sudo") do
     it { should be_file }
     it { should be_mode 644 }
