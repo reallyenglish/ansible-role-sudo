@@ -22,5 +22,4 @@ galaxy_info:
 
   galaxy_tags:
     - sudo
-#dependencies:
-#  - { role: username.common, some_parameter: 3 }
+dependencies:
