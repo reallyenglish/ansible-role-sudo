@@ -1,3 +1,7 @@
+## Release 1.2.1
+
+* 826e7c4 [bugfix] Remove warning (#18)
+
 ## Release 1.2.0
 
 * 1758eae add `secure_path` by default (#15)
