@@ -1,3 +1,7 @@
+## Release 1.3.0
+
+* a358109 [feature] support FreeBSD 11.1 and OpenBSD 6.[12] (#21)
+
 ## Release 1.2.1
 
 * 826e7c4 [bugfix] Remove warning (#18)
