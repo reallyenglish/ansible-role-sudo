@@ -12,7 +12,7 @@ end
 
 case os[:family]
 when "freebsd"
-  env_keeps = %w(
+  env_keeps = %w[
     FTP_PASSIVE_MODE
     PACKAGEROOT
     PACKAGES
@@ -27,9 +27,9 @@ when "freebsd"
     PORTSDIR
     PORTS_INDEX
     TMPDIR
-  )
+  ]
 when "openbsd"
-  env_keeps = %w(
+  env_keeps = %w[
     DESTDIR
     DISTDIR
     FETCH_CMD
@@ -55,7 +55,7 @@ when "openbsd"
     SUBPACKAGE
     SUDO_PORT_V1
     WRKOBJDIR
-  )
+  ]
 end
 
 describe package "sudo" do
